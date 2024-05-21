@@ -3,7 +3,6 @@ import Card from "./Card"
 
 
 export default function CardList({storage, handleClick, clickedCardIds}) {
-  console.log(clickedCardIds)
 
   const isWon = storage.length > 0 ? storage.length === clickedCardIds.length : false
 
@@ -41,7 +40,7 @@ export default function CardList({storage, handleClick, clickedCardIds}) {
 
 
   return (
-    <>
+    <div className="container">
       {!isWon && genRandomArray(storage, clickedCardIds).map((index) => (
         <Card
           character={storage[index]}
@@ -49,7 +48,6 @@ export default function CardList({storage, handleClick, clickedCardIds}) {
           handleClick={handleClick}
         />
       ))}
-      <h3>{clickedCardIds.length}</h3>
-    </>
+    </div>
   )
 }

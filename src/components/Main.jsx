@@ -2,22 +2,24 @@ import { useEffect, useState } from "react"
 import StartScreen from "./StartScreen"
 import CardList from "./CardList"
 
-function Main() {
+function Main({incrementPoints, erasePoints}) {
   const [gameState, setGameState] = useState('start')
   const [storage, setStorage] = useState(null)
   const [clickedCardIds, setClickedCardIds] = useState([])
-  
+
   useEffect(() => {
     getData()
   }, [])
   
+
   useEffect(() => {
     if (storage !== null) {
       if (clickedCardIds.length === storage.length) {
-        setGameState('endGame')
+        setGameState('winning')
       }
     }
   }, [clickedCardIds])
+
 
   const getData = async () => {
     const response = await fetch('https://dragonball-api.com/api/characters')
@@ -34,24 +36,26 @@ function Main() {
     if (!array.includes(id)) {
       array.push(id)
       setClickedCardIds(array)
+      incrementPoints()
     } else if (array.includes(id)) {
-      console.log('LOOSE')
+      setGameState('loosing')
     }
   }
-
-
+  
+  
   const handleStartGame = () => {
     setGameState('playing')
   }
-
-
-  const endGame = () => {
-    setGameState('endGame')
+  
+  const playAgain = () => {
+    setClickedCardIds([])
+    setGameState('playing')
+    erasePoints()
   }
 
- 
+  
   return (
-    <div className="container">
+    <>
       {(gameState === 'start') && (
         <StartScreen
           onStartGame = {handleStartGame}
@@ -64,10 +68,17 @@ function Main() {
           handleClick={handleClickCard}
         />
       )}
-       {(gameState === 'endGame') && (
-        <div>End of game</div>
+       {(gameState === 'winning') && (
+        <div>You Won</div>
       )}
-    </div>
+      {(gameState === 'loosing') && (
+
+        <>
+          <div>You loose</div>
+          <button className="button restart-button" onClick={playAgain}>Play Again?</button>
+        </>
+      )}
+    </>
   )
 }
 

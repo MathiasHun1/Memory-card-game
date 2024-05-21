@@ -9,7 +9,6 @@ export default function Card({character, handleClick}) {
       >
         <h3>{character.name}</h3>
         <img src={character.image} alt="" />
-        <p>id: {character.id}</p>
       </button>
     </>
   )
