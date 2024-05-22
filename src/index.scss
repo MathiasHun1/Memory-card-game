@@ -2,6 +2,7 @@
 
 $backGround: rgba(0, 0, 0, 0.959);
 $yellow: rgba(255, 251, 10, 0.911);
+$grey: rgba(204, 203, 203, 0.973);
 
 * {
   box-sizing: border-box;
@@ -125,13 +126,19 @@ html {
   border: 2px solid;
   padding: 10px;
   width: 200px;
-  background-color: rgba(204, 203, 203, 0.973);
+  background-color: $grey;
   border-radius: 12px;
 }
 
 .card:hover {
   cursor: pointer;
   background-color: rgba(126, 126, 126, 0.973);
+}
+
+@media (hover:none) {
+  .card:hover {
+    background-color: $grey;
+  }  
 }
 
 .card img {
