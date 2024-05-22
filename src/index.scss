@@ -200,12 +200,20 @@ html {
   #root {
     width: 100vw;
     max-width: 767px;
-    min-width: 500px;
+    min-width: 420px;
     height: 100vh;
   }
 
   #root::before {
     max-width: 767px;
+  }
+
+  .card {
+    width: 150px;
+  }
+
+  .card img {
+    height: 150px;
   }
 
 }
