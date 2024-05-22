@@ -4,6 +4,13 @@ import Main from "./components/Main"
 
 function App() {
   const [points, setPoints] = useState(0)
+  const [highScore, setHighScore] = useState(0)
+
+  const modifyHighScore = (points, score) => {
+    if (points > score) {
+      setHighScore(points)
+    }
+  }
 
   const incrementPoints = () => {
     setPoints(prevPoints => prevPoints+1)
@@ -15,8 +22,14 @@ function App() {
  
   return (
     <>
-      <Header points={points}/>
-      <Main incrementPoints={incrementPoints} erasePoints={erasePoints}/>
+      <Header points={points} highScore={highScore}/>
+      <Main 
+        points={points}
+        highScore={highScore}
+        incrementPoints={incrementPoints} 
+        erasePoints={erasePoints}
+        modifyHighScore={modifyHighScore}
+      />
     </>
   )
 }

@@ -3,7 +3,7 @@ export default function Card({character, handleClick}) {
   return (
     <>
       <button 
-        className="card" 
+        className="card effect" 
         key={character.id}
         onClick={() => handleClick(character.id)}
       >

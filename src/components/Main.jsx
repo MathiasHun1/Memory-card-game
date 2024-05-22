@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import StartScreen from "./StartScreen"
 import CardList from "./CardList"
 
-function Main({incrementPoints, erasePoints}) {
+function Main({incrementPoints, erasePoints, modifyHighScore, points, highScore}) {
   const [gameState, setGameState] = useState('start')
   const [storage, setStorage] = useState(null)
   const [clickedCardIds, setClickedCardIds] = useState([])
@@ -19,6 +19,12 @@ function Main({incrementPoints, erasePoints}) {
       }
     }
   }, [clickedCardIds])
+
+  useEffect(() => {
+    if (gameState === 'loosing') {
+      modifyHighScore(points, highScore)
+    }
+  }, [gameState])
 
 
   const getData = async () => {
@@ -69,12 +75,15 @@ function Main({incrementPoints, erasePoints}) {
         />
       )}
        {(gameState === 'winning') && (
-        <div>You Won</div>
+        <>
+          <h3 className="end effect">You found it All!</h3>
+          <button className="button restart-button" onClick={playAgain}>Play Again?</button>
+        </>
       )}
       {(gameState === 'loosing') && (
 
         <>
-          <div>You loose</div>
+          <h3 className="end effect">You loose</h3>
           <button className="button restart-button" onClick={playAgain}>Play Again?</button>
         </>
       )}

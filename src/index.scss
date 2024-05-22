@@ -7,7 +7,7 @@ $yellow: rgba(255, 251, 10, 0.911);
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  // overflow: hidden;
   font-family: 'Bungee';
 }
 
@@ -59,7 +59,13 @@ html {
     font-size: 56px;
   }
 
-  p {
+  .points {
+    position: absolute; 
+    left: 1rem;
+    bottom: 2rem;
+  }
+
+  .highscore {
     position: absolute; 
     left: 1rem;
     bottom: 1rem;
@@ -78,12 +84,17 @@ html {
   padding: 1rem;
   margin-top: 150px;
   position: relative;
+
+  @media only screen and (max-width: 767px) {
+    width: 100vw;
+  }
 }
 
 .start-button {
   margin-top: 10rem;
   font-size: 36px;
-  animation: scaleUp 3s ease-in 0s 1 normal forwards;
+  animation: scaleUp 3s ease-out 0s 1 normal forwards;
+  border: 2px solid black;
 }
 
 @keyframes scaleUp {
@@ -131,4 +142,70 @@ html {
 .button {
   background-color: $yellow;
   padding: 12px;
+  border: 2px solid black;
+}
+
+.end {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: $yellow;
+}
+
+.effect {
+  opacity: 0;
+  animation: lightEffect 0.2s ease-in 0s 1 normal forwards;
+}
+
+@keyframes lightEffect {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 80;
+  }
+}
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 767px) {
+  .header h1 {
+    padding-top: 12px;
+    font-size: 28px;
+  }
+
+  .header h3 {
+    font-size: 16px;
+  }
+
+  header p {
+    font-size: 14px;
+  }
+  
+  * {
+    overflow: visible;
+  }
+  
+  .container {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  #root {
+    width: 100vw;
+    max-width: 767px;
+    min-width: 500px;
+    height: 100vh;
+  }
+
+  #root::before {
+    max-width: 767px;
+  }
+
 }
